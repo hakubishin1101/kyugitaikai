@@ -4,15 +4,17 @@ export default function QuestionForm() {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [person, setPerson] = useState("");
   const [generatedCode, setGeneratedCode] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (question && answer) {
-      const newQuestions = [...questions, { question, answer }];
+    if (question && answer && person) {
+      const newQuestions = [...questions, { question, answer, person }];
       setQuestions(newQuestions);
       setQuestion("");
       setAnswer("");
+      setPerson("");
       generateCode(newQuestions);
     }
   };
@@ -23,6 +25,7 @@ export default function QuestionForm() {
   ${questions
     .map(
       (q, index) => `
+  <!-- 担当者: ${q.person} -->
   <h4>Q${index + 1}. ${q.question}</h4>
   <h4>A${index + 1}. ${q.answer}</h4>`
     )
@@ -50,6 +53,16 @@ export default function QuestionForm() {
             type="text"
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div className="mb-2">
+          <label className="block text-sm font-bold">担当者:</label>
+          <input
+            type="text"
+            value={person}
+            onChange={(e) => setPerson(e.target.value)}
             className="w-full p-2 border rounded"
             required
           />
