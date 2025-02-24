@@ -23,8 +23,8 @@ export default function QuestionForm() {
   ${questions
     .map(
       (q, index) => `
-  <h4>Q${index + 1}. ${q.question}</h4>
-  <h4>A${index + 1}. ${q.answer}</h4>`
+  <h4 class="question">Q${index + 1}. ${q.question}</h4>
+  <h4 class="answer">A${index + 1}. ${q.answer}</h4>`
     )
     .join("\n  ")}
 </div>`;
